@@ -1,13 +1,13 @@
 function QuestionCard({ question, options, selectedAnswer, onAnswerSelect }) {
   return (
-    <div>
+    <div className="question-card">
       <h3>{question}</h3>
-      <div>
+      <div className="options">
         {options.map((option, index) => (
           <button
+            className="btn btn-primary"
             key={index}
-            onClick={() => onAnswerSelect(option)}
-          >
+            onClick={() => onAnswerSelect(option)}>
             {option}
           </button>
         ))}

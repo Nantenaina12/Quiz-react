@@ -1,1 +1,19 @@
 @import "tailwindcss";
+@plugin "daisyui";
+
+.question-card h3{
+  font-size: large;
+  font-weight: normal;
+}
+.btn{
+  margin: 5px;
+  padding: 2px auto;
+  border-radius: 10px;
+
+}
+.options button:hover{
+  cursor: pointer;
+}
+.options button:focus{
+  background-color: #12c3d7;
+}

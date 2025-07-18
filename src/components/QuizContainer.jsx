@@ -152,49 +152,54 @@ function QuizContainer() {
   const progress = ((currentQuestionIndex + 1) / questions.length) * 100;
 
   return (
-    <div className="quiz-container">
-      {quizCompleted ? (
-        <ResultScreen 
-          score={score} 
-          totalQuestions={questions.length} 
-          onRestart={handleRestart} 
-        />
-      ) : (
-        <>
-          <div className="progress-bar">
-            <div 
-              className="progress" 
-              style={{ width: `${progress}%` }}
-            ></div>
-          </div>
-          
-          <QuestionCard
-            question={questions[currentQuestionIndex].question}
-            options={questions[currentQuestionIndex].options}
-            selectedAnswer={selectedAnswer}
-            onAnswerSelect={handleAnswerSelect}
-            correctAnswer={questions[currentQuestionIndex].correctAnswer}
-            showFeedback={showFeedback}
-          />
-          
-          <button 
-            onClick={handleValidate} 
-            disabled={selectedAnswer === null}
-            className="validate-btn"
-          >
-            Valider
-          </button>
-          
-          {showFeedback && (
-            <div className={`feedback ${selectedAnswer === questions[currentQuestionIndex].correctAnswer ? 'correct' : 'incorrect'}`}>
-              {selectedAnswer === questions[currentQuestionIndex].correctAnswer
-                ? "Correct ! 🎉"
-                : `Incorrect. La réponse était : ${questions[currentQuestionIndex].correctAnswer}`}
-            </div>
-          )}
-        </>
+    <div className="quiz-container bg-base-100 rounded-box shadow-lg p-6 max-w-2xl mx-auto mt-10">
+  {quizCompleted ? (
+    <ResultScreen 
+      score={score} 
+      totalQuestions={questions.length} 
+      onRestart={handleRestart} 
+    />
+  ) : (
+    <>
+      <div className="progress-bar bg-base-200 rounded-full h-4 mb-6">
+        <div 
+          className="progress bg-primary rounded-full h-full transition-all duration-300" 
+          style={{ width: `${progress}%` }}
+        ></div>
+      </div>
+      
+      <QuestionCard
+        question={questions[currentQuestionIndex].question}
+        options={questions[currentQuestionIndex].options}
+        selectedAnswer={selectedAnswer}
+        onAnswerSelect={handleAnswerSelect}
+        correctAnswer={questions[currentQuestionIndex].correctAnswer}
+        showFeedback={showFeedback}
+      />
+      
+      <button 
+        onClick={handleValidate} 
+        disabled={selectedAnswer === null}
+        className="validate-btn btn btn-primary mt-6 w-full disabled:btn-disabled"
+      >
+        Valider
+      </button>
+      
+      {showFeedback && (
+        <div className={`feedback mt-4 p-4 rounded-box ${
+          selectedAnswer === questions[currentQuestionIndex].correctAnswer 
+            ? 'bg-success text-success-content' 
+            : 'bg-error text-error-content'
+        }`}>
+          {selectedAnswer === questions[currentQuestionIndex].correctAnswer
+            ? "Correct ! 🎉"
+            : `Incorrect. La réponse était : ${questions[currentQuestionIndex].correctAnswer}`}
+        </div>
       )}
-    </div>
+    </>
+  )}
+</div>
+   
   );
 }
 
